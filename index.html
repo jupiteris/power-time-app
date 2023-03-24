@@ -11,11 +11,15 @@
 <body>
 
   <div class="container">
-    <div class="tissue">
 
-
+    <div class="tissues">
+      <button class="clicked" value="LV">LV</button>
+      <button value="KD">KD</button>
+      <button value="LG">LG</button>
     </div>
+
     <div class="visual">
+
       <div class="ellipse">
         <div class="length-line">
           <div>21 cm</div>
@@ -26,36 +30,66 @@
         </div>
 
         <div class="offset-line">
-          <div>1 cm</div>
+          <div>0.8 cm</div>
         </div>
       </div>
 
       <img src="assets/img/probs/1P.png" class="prob-img" />
 
-      <div class="info-btn" onclick="openInfoModal()">
-        i
-      </div>
+      <div class="info-btn" onclick="openInfoModal()"> i </div>
+
     </div>
 
     <div class="prob">
-
+      <label for="probes">Probe</label>
+      <select name="probes" id="probes" onchange="changeProbe(this)">
+        <option value="1P">1P</option>
+        <option value="2P">2P</option>
+        <option value="3L">3L</option>
+        <option value="4L">4L</option>
+        <option value="5S">5S</option>
+        <option value="6L">6L</option>
+        <option value="7P">7P</option>
+      </select>
+      <div class="arrow down"></div>
     </div>
+
     <div class="prob-quantity">
-
-    </div>
-    <div class="time">
-
-    </div>
-    <div class="power">
-
+      <button class="clicked" value="1">1 Probe</button>
+      <button value="2">2 Probes</button>
+      <button value="3">3 Probes</button>
     </div>
 
+    <div class="time card">
+      <div class="title">Time</div>
+      <div class="value">
+        <div class="step">
+          <div class="arrow up" onclick="changeTime(1)"></div>
+          <div class="arrow down" onclick="changeTime(-1)"></div>
+        </div>
+        5:00
+      </div>
+      <div class="unit">Minutes</div>
+    </div>
+
+    <div class="power card">
+      <div class="title">Power</div>
+      <div class="value">
+        <div class="step">
+          <div class="arrow up" onclick="changePower(1)"></div>
+          <div class="arrow down" onclick="changePower(-1)"></div>
+        </div>
+        65
+      </div>
+      <div class="unit">Watts</div>
+    </div>
 
   </div>
 
   <div id="info-modal" class="modal">
     <div class="modal-content">
       <span class="close" onclick="onCloseModal()">&times;</span>
+
       The ablation zone data provided on-screen and in the instructions for use are from ablations performed in ex-vivo
       animal tissue and do not account for the cooling effects of blood flow. Blood flow will generally result in a
       smaller ablation.

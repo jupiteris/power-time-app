@@ -6,6 +6,7 @@
     --shadow-1: #81807A;
     --shadow-2: #E0DFD7;
     --border-color: #63666A;
+    --border-radius: 8px;
 }
 
 html {
@@ -22,6 +23,29 @@ body {
     justify-content: center;
     color: var(--primary-color);
     position: relative;
+}
+
+button {
+    border: 0;
+    border-radius: var(--border-radius);
+    color: inherit;
+}
+
+select {
+    -webkit-appearance: none;
+    text-align: center;
+    border: none;
+    color: var(--second-color);
+    height: 100%;
+    width: 50%;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+select:focus {
+    border: none;
+    box-shadow: none;
+    outline: none;
 }
 
 .container {
@@ -68,16 +92,70 @@ body {
     color: var(--second-color);
     font-size: 20px;
     font-weight: bold;
+    box-shadow: 6px 6px 6px var(--shadow-2);
 }
 
-.tissue,
+.tissues,
 .prob,
 .prob-quantity,
 .time,
 .power {
     background: var(--alt-bg-color);
-    border-radius: 8px;
+    border-radius: var(--border-radius);
     box-shadow: 4px 4px 4px var(--shadow-2);
+}
+
+.prob {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 24px;
+}
+
+.prob label {
+    text-align: center;
+}
+
+.tissues,
+.prob-quantity {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.tissues .clicked,
+.prob-quantity .clicked {
+    background: var(--second-color);
+    color: var(--alt-bg-color);
+}
+
+.card {
+    padding: 8px 24px;
+    display: grid;
+    grid-template-rows: max-content 1fr max-content;
+}
+
+.card .unit {
+    width: 100%;
+    text-align: center;
+}
+
+.card .value {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--second-color);
+    font-weight: bold;
+    font-size: 35px;
+}
+
+.card .value .step {
+    position: absolute;
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    flex-direction: column;
+    right: 0;
 }
 
 .length-line {
@@ -211,7 +289,7 @@ body {
 }
 
 .modal-content {
-    border-radius: 8px;
+    border-radius: var(--border-radius);
     border: 4px solid var(--border-color);
     height: 100%;
     background: var(--alt-bg-color);
@@ -266,4 +344,21 @@ body {
     opacity: 1;
     text-decoration: none;
     cursor: pointer;
+}
+
+.arrow {
+    width: 15px;
+    height: 15px;
+    border-left: 2px solid var(--second-color);
+    border-bottom: 2px solid var(--second-color);
+}
+
+.up {
+    transform: rotate(143deg) skew(15deg);
+    -webkit-transform: rotate(143deg) skew(15deg);
+}
+
+.down {
+    transform: rotate(-37deg) skew(15deg);
+    -webkit-transform: rotate(-37deg) skew(15deg);
 }
