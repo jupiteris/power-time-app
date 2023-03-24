@@ -31,6 +31,10 @@
       </div>
 
       <img src="assets/img/probs/1P.png" class="prob-img" />
+
+      <div class="info-btn" onclick="openInfoModal()">
+        i
+      </div>
     </div>
 
     <div class="prob">
@@ -44,6 +48,35 @@
     </div>
     <div class="power">
 
+    </div>
+
+
+  </div>
+
+  <div id="info-modal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="onCloseModal()">&times;</span>
+      The ablation zone data provided on-screen and in the instructions for use are from ablations performed in ex-vivo
+      animal tissue and do not account for the cooling effects of blood flow. Blood flow will generally result in a
+      smaller ablation.
+      <br />
+      <br />
+      Lower power ablations are more impacted by the cooling effects of blood flow.
+      <br />
+      <br />
+      Additional factors that may impact the final ablation zone include but are not limited to:
+      <p>Factors that may result in a smaller ablation</p>
+      <ul>
+        <li>Increased/high level of vascularity</li>
+        <li>Proximity to large blood vessels</li>
+      </ul>
+      <p>Factors that may result in a larger ablation</p>
+      <ul>
+        <li>Decreased/low level of vascularity</li>
+        <li>Prior treatments such as TACE or embolization</li>
+      </ul>
+      <br />
+      Physicians should consider all factors when determining the appropriate ablation parameters for each case.
     </div>
   </div>
 
