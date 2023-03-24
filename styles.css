@@ -9,8 +9,16 @@
     --border-radius: 8px;
 }
 
+@font-face {
+    font-family: "CircularStd";
+    src: url("./assets//fonts/CircularStd-Bold.otf") format("opentype"),
+        url("./assets//fonts/CircularStd-Black.otf") format("opentype"),
+        url("./assets//fonts/CircularStd-Book.otf") format("opentype");
+}
+
 html {
     background: gray;
+    font-family: "CircularStd";
 }
 
 body {
@@ -21,7 +29,6 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--primary-color);
     position: relative;
 }
 
@@ -29,6 +36,7 @@ button {
     border: 0;
     border-radius: var(--border-radius);
     color: inherit;
+    font-size: 16px;
 }
 
 select {
@@ -37,7 +45,6 @@ select {
     border: none;
     color: var(--second-color);
     height: 100%;
-    width: 50%;
     font-size: 24px;
     font-weight: bold;
 }
@@ -51,15 +58,17 @@ select:focus {
 .container {
     display: grid;
     grid-template-rows: 40px max-content 40px 40px 100px 100px;
-    gap: 12px;
+    gap: 16px;
     width: calc(100% - 80px);
+    color: var(--primary-color);
+    font-size: 14px;
 }
 
 .visual {
     display: flex;
     align-items: center;
     justify-content: right;
-    margin-right: 20px;
+    margin-right: 32px;
     position: relative;
 }
 
@@ -90,9 +99,9 @@ select:focus {
     border: 2px solid var(--second-color);
     border-radius: 50%;
     color: var(--second-color);
-    font-size: 20px;
+    font-size: 24px;
     font-weight: bold;
-    box-shadow: 6px 6px 6px var(--shadow-2);
+    box-shadow: 4px 4px 8px var(--shadow-1);
 }
 
 .tissues,
@@ -106,14 +115,20 @@ select:focus {
 }
 
 .prob {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 2.5fr 1fr;
     align-items: center;
-    justify-content: space-between;
-    padding: 8px 24px;
+    padding: 0px 16px;
 }
 
 .prob label {
-    text-align: center;
+    text-align: left;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.prob div {
+    justify-self: flex-end;
 }
 
 .tissues,
@@ -126,10 +141,11 @@ select:focus {
 .prob-quantity .clicked {
     background: var(--second-color);
     color: var(--alt-bg-color);
+    font-weight: bold;
 }
 
 .card {
-    padding: 8px 24px;
+    padding: 4px 16px;
     display: grid;
     grid-template-rows: max-content 1fr max-content;
 }
@@ -146,7 +162,7 @@ select:focus {
     justify-content: center;
     color: var(--second-color);
     font-weight: bold;
-    font-size: 35px;
+    font-size: 40px;
 }
 
 .card .value .step {
@@ -158,88 +174,76 @@ select:focus {
     right: 0;
 }
 
-.length-line {
-    width: 100%;
-    height: 2px;
+.line {
+    font-size: 20px;
+    font-weight: lighter;
+    letter-spacing: 1.2px;
     background: var(--primary-color);
     position: absolute;
+    height: 2px;
+}
+
+.line div {
+    position: absolute;
+}
+
+.line::before,
+.line::after {
+    content: "";
+    width: 8px;
+    height: 2px;
+    background: var(--primary-color);
+    display: block;
+    position: absolute;
+}
+
+.length-line {
+    width: 100%;
     top: -14px;
 }
 
 .length-line div {
-    position: absolute;
-    text-align: center;
     width: 100%;
-    top: -20px;
+    top: -28px;
+    text-align: center;
 }
 
 .length-line:before {
-    content: "";
-    width: 8px;
-    height: 2px;
-    background: var(--primary-color);
-    display: block;
     transform: rotate(90deg);
-    position: absolute;
     left: -4px;
 }
 
 .length-line:after {
-    content: "";
-    width: 8px;
-    height: 2px;
-    background: var(--primary-color);
-    display: block;
     transform: rotate(90deg);
-    position: absolute;
     right: -4px;
 }
 
 .height-line {
-    width: 2px;
     height: 100%;
-    background: var(--primary-color);
-    position: absolute;
+    width: 2px;
     right: -14px;
 }
 
 .height-line div {
-    position: absolute;
     right: -20px;
     display: flex;
     height: 100%;
     align-items: center;
     width: max-content;
-    left: 5px;
+    left: 8px;
 }
 
 .height-line:before {
-    content: "";
-    width: 8px;
-    height: 2px;
-    background: var(--primary-color);
-    display: block;
-    position: absolute;
     top: 0;
     left: -3px;
 }
 
 .height-line:after {
-    content: "";
-    width: 8px;
-    height: 2px;
-    background: var(--primary-color);
-    display: block;
-    position: absolute;
     bottom: 0;
     right: -3px;
 }
 
 .offset-line {
-    width: 20px;
-    height: 2px;
-    background: var(--primary-color);
-    position: absolute;
     bottom: 0;
     right: 0px;
     display: flex;
@@ -247,30 +251,17 @@ select:focus {
 }
 
 .offset-line div {
-    position: absolute;
     width: max-content;
-    top: 6px;
+    top: 8px;
 }
 
 .offset-line:before {
-    content: "";
-    width: 8px;
-    height: 2px;
-    background: var(--primary-color);
-    display: block;
     transform: rotate(90deg);
-    position: absolute;
     left: -4px;
 }
 
 .offset-line:after {
-    content: "";
-    width: 8px;
-    height: 2px;
-    background: var(--primary-color);
-    display: block;
     transform: rotate(90deg);
-    position: absolute;
     right: -4px;
 }
 
