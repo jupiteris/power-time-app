@@ -1,6 +1,5 @@
 const visualDom = document.querySelector('.visual');
 const ellipseDom = document.querySelector('.ellipse');
-const offsetLine = document.querySelector('.offset-line');
 const probImg = document.querySelector('.probe-img');
 const infoModal = document.getElementById('info-modal');
 const tissueOptions = document.querySelectorAll('.tissues button');
@@ -120,6 +119,7 @@ function renderEllipse() {
 
     if (equations.length === 0) {
         ellipseDom.style.display = "none"
+        probImg.style.marginRight = 0;
     }
     else {
         ellipseDom.style.display = "block"
@@ -133,8 +133,9 @@ function renderEllipse() {
 
         ellipseDom.style.width = (visualDom.clientWidth * Dimensions.Length / THRESHOLD) + 'px';
         ellipseDom.style.height = (visualDom.clientWidth * Dimensions.Height / THRESHOLD) + 'px';
-        offsetLine.style.width = (visualDom.clientWidth * Math.abs(Dimensions.Offset) / THRESHOLD) + 'px';
+
         probImg.style.marginRight = (visualDom.clientWidth * Dimensions.Offset / THRESHOLD) + 'px';
+        ellipseDom.querySelector('.offset-line').style.width = (visualDom.clientWidth * Math.abs(Dimensions.Offset) / THRESHOLD) + 'px';
 
         if (Dimensions.Offset < 0) {
             ellipseDom.querySelector('.offset-line').style.right = (visualDom.clientWidth * Dimensions.Offset / THRESHOLD) + 'px';
