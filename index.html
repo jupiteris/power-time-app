@@ -5,44 +5,45 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>PowerTimeApp</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="assets/styles/styles.css">
 </head>
 
-<body>
+
+<body class="flex relative">
 
   <div class="container">
 
     <div class="tissues">
-      <button class="clicked" value="LV">LV</button>
+      <button value="LV" class="clicked">LV</button>
       <button value="KD">KD</button>
       <button value="LG">LG</button>
     </div>
 
-    <div class="visual">
+    <div class="flex relative visual">
 
-      <div class="ellipse">
-        <div class="length-line line">
-          <div>21cm</div>
+      <div class="ellipse relative">
+        <div class="length-line line absolute">
+          <div class="flex absolute"></div>
         </div>
 
-        <div class="height-line line">
-          <div>10cm</div>
+        <div class="height-line line absolute">
+          <div class="flex absolute"></div>
         </div>
 
-        <div class="offset-line line">
-          <div>0.8cm</div>
+        <div class="offset-line line absolute flex">
+          <div class="absolute"></div>
         </div>
       </div>
 
-      <img src="assets/img/probs/1P.png" class="prob-img" />
+      <img class="absolute probe-img" />
 
-      <div class="info-btn" onclick="openInfoModal()"> i </div>
+      <div class="flex absolute info-btn" onclick="openInfoModal()"> i </div>
 
     </div>
 
-    <div class="prob">
+    <div class="probe">
       <label for="probes">Probe</label>
-      <select name="probes" id="probes" onchange="changeProbe(this)">
+      <select name="probes" id="probes" onchange="changeProbe(this)" onfocus="focusProbe()" onblur="blurProbe()">
         <option value="1P">1P</option>
         <option value="2P">2P</option>
         <option value="3L">3L</option>
@@ -54,41 +55,41 @@
       <div class="arrow down"></div>
     </div>
 
-    <div class="prob-quantity">
-      <button class="clicked" value="1">1 Probe</button>
+    <div class="probe-quantity">
+      <button value="1" class="clicked">1 Probe</button>
       <button value="2">2 Probes</button>
       <button value="3">3 Probes</button>
     </div>
 
     <div class="time card">
       <div class="title">Time</div>
-      <div class="value">
-        <div class="step">
-          <div class="arrow up" onclick="changeTime(1)"></div>
-          <div class="arrow down" onclick="changeTime(-1)"></div>
+      <div class="flex relative">
+        <div class="step flex absolute">
+          <button class="arrow up" onclick="changeTime(1)"></button>
+          <button class="arrow down" onclick="changeTime(-1)"></button>
         </div>
-        5:00
+        <p class="value"></p>
       </div>
       <div class="unit">Minutes</div>
     </div>
 
     <div class="power card">
       <div class="title">Power</div>
-      <div class="value">
-        <div class="step">
-          <div class="arrow up" onclick="changePower(1)"></div>
-          <div class="arrow down" onclick="changePower(-1)"></div>
+      <div class="flex relative">
+        <div class="step flex absolute">
+          <button class="arrow up" onclick="changePower(1)"></button>
+          <button class="arrow down" onclick="changePower(-1)"></button>
         </div>
-        65
+        <p class="value"></p>
       </div>
       <div class="unit">Watts</div>
     </div>
 
   </div>
 
-  <div id="info-modal" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="onCloseModal()">&times;</span>
+  <div id="info-modal" class="modal absolute">
+    <div class="relative flex modal-content">
+      <span class="flex close absolute" onclick="onCloseModal()">&times;</span>
 
       The ablation zone data provided on-screen and in the instructions for use are from ablations performed in ex-vivo
       animal tissue and do not account for the cooling effects of blood flow. Blood flow will generally result in a
@@ -114,7 +115,9 @@
     </div>
   </div>
 
-  <script src="script.js"></script>
+  <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+  <script lang="javascript" src="assets/js/equation.js"></script>
+  <script lang="javascript" src="assets/js/script.js"></script>
 </body>
 
 </html>
