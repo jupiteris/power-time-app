@@ -26,7 +26,7 @@ body {
     background: var(--bg-color);
     height: 100vh;
     margin: 0 auto;
-    max-width: 600px;
+    max-width: 500px;
 }
 
 button {
@@ -247,6 +247,7 @@ select:focus {
 .offset-line {
     bottom: 0;
     right: 0px;
+    bottom: -14px;
 }
 
 .offset-line div {
@@ -287,6 +288,7 @@ select:focus {
     flex-direction: column;
     font-weight: bold;
     color: var(--primary-color);
+    align-items: unset;
 }
 
 #info-modal .modal-content p {

@@ -10,7 +10,7 @@ const probeSelectArrow = document.querySelector('.probe .arrow');
 let tissue = 'LV';
 let probe = '1P';
 let time = 5;
-let power = 60;
+let power = 65;
 let probeQuantity = 1;
 let probeOpen = false;
 
@@ -18,7 +18,7 @@ let probeOpen = false;
 const MIN_TIME = 1;
 const MAX_TIME = 5;
 const MIN_POWER = 35;
-const MAX_POWER = 60;
+const MAX_POWER = 65;
 const TIME_STEP = 1;
 const POWER_STEP = 5;
 const THRESHOLD = 4.6 + 0.6; // Max length + Max offset
@@ -66,7 +66,10 @@ probeQuantityOptions.forEach(option => {
     option.addEventListener('click', function () {
         unselectAll(probeQuantityOptions);
         option.className = "clicked";
-        probeQuantity = option.getAttribute('value')
+        probeQuantity = option.getAttribute('value');
+
+        // TODO: option for now
+        // renderEllipse();
     });
 });
 
