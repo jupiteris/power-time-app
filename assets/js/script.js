@@ -21,7 +21,7 @@ const MIN_POWER = 35;
 const MAX_POWER = 60;
 const TIME_STEP = 1;
 const POWER_STEP = 5;
-const THRESHOLD = 4;
+const THRESHOLD = 4.6 + 0.6; // Max length + Max offset
 
 // modal
 function openInfoModal() {
@@ -139,13 +139,14 @@ function renderEllipse() {
 
         if (Dimensions.Offset < 0) {
             ellipseDom.querySelector('.offset-line').style.right = (visualDom.clientWidth * Dimensions.Offset / THRESHOLD) + 'px';
-            ellipseDom.querySelector('.offset-line').style.bottom = '-8px';
-            ellipseDom.querySelector('.height-line div').style.marginTop = '-16px';
+            ellipseDom.querySelector('.height-line').style.right = -((visualDom.clientWidth * Math.abs(Dimensions.Offset) / THRESHOLD) + 14) + 'px';
+            visualDom.style.marginRight = ((visualDom.clientWidth * Math.abs(Dimensions.Offset) / THRESHOLD) + 40) + 'px';
         }
         else {
             ellipseDom.querySelector('.offset-line').style.right = 0;
-            ellipseDom.querySelector('.offset-line').style.bottom = 0;
-            ellipseDom.querySelector('.height-line div').style.marginTop = 0;
+            ellipseDom.querySelector('.height-line').style.right = '-14px';
+            visualDom.style.marginRight = '40px'
         }
     }
 }
+
