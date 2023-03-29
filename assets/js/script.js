@@ -10,13 +10,13 @@ const probeSelectArrow = document.querySelector('.probe .arrow');
 let tissue = 'LV';
 let probe = '1P';
 let time = 5;
-let power = 65;
+let power = 60;
 let probeQuantity = 1;
-let probeOpen = false;
+let showProbeList = false;
 
 // static values
 const MIN_TIME = 1;
-const MAX_TIME = 5;
+const MAX_TIME = 6;
 const MIN_POWER = 35;
 const MAX_POWER = 65;
 const TIME_STEP = 1;
@@ -98,27 +98,29 @@ function changePower(direction) {
 }
 
 // probe type selector
-function changeProbe(e) {
-    probe = e.value
-    e.blur()
-    renderEllipse()
+function changeProbe(value) {
+    probe = value;
+    renderEllipse();
 }
 
-function focusProbe() {
-    probeSelectArrow.classList.add('up')
-    probeSelectArrow.classList.remove('down')
-}
-
-function blurProbe() {
-    probeSelectArrow.classList.add('down')
-    probeSelectArrow.classList.remove('up')
+function handleDropdown() {
+    showProbeList = !showProbeList
+    document.querySelector('.probe .dropdown-content').style.display = showProbeList ? 'block' : 'none'
+    if (showProbeList) {
+        probeSelectArrow.classList.add('up')
+        probeSelectArrow.classList.remove('down')
+    } else {
+        probeSelectArrow.classList.add('down')
+        probeSelectArrow.classList.remove('up')
+    }
 }
 
 function renderEllipse() {
     let Dimensions = { Length: 200, Height: 150, Offset: null };
     const equations = Calculations.filter(({ Probe, Tissue }) => Probe === probe && Tissue === tissue)
 
-    probImg.setAttribute('src', `assets/img/probs/${probe}.png`)
+    probImg.setAttribute('src', `assets/img/probs/${probe}.png`);
+    document.querySelector('.probe-value').innerHTML = probe;
 
     if (equations.length === 0) {
         ellipseDom.style.display = "none"
@@ -132,7 +134,7 @@ function renderEllipse() {
 
         ellipseDom.querySelector('.length-line div').innerHTML = Dimensions.Length.toFixed(1) + 'cm'
         ellipseDom.querySelector('.height-line div').innerHTML = Dimensions.Height.toFixed(1) + 'cm'
-        ellipseDom.querySelector('.offset-line div').innerHTML = Math.abs(Dimensions.Offset).toFixed(1) + 'cm'
+        ellipseDom.querySelector('.offset-line div').innerHTML = Dimensions.Offset.toFixed(1) + 'cm'
 
         ellipseDom.style.width = (visualDom.clientWidth * Dimensions.Length / THRESHOLD) + 'px';
         ellipseDom.style.height = (visualDom.clientWidth * Dimensions.Height / THRESHOLD) + 'px';

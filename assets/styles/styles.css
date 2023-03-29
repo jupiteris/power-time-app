@@ -27,6 +27,12 @@ body {
     height: 100vh;
     margin: 0 auto;
     max-width: 500px;
+    display: grid;
+    grid-template-rows: 40px 1fr;
+    gap: 20px;
+    padding: 0 40px;
+    box-sizing: border-box;
+    position: relative;
 }
 
 button {
@@ -39,22 +45,6 @@ button {
 
 button:disabled {
     border-color: var(--border-color);
-}
-
-select {
-    -webkit-appearance: none;
-    text-align: center;
-    border: none;
-    color: var(--second-color);
-    height: 100%;
-    font-size: 24px;
-    font-weight: bold;
-}
-
-select:focus {
-    border: none;
-    box-shadow: none;
-    outline: none;
 }
 
 /* generic style */
@@ -72,11 +62,15 @@ select:focus {
     position: absolute;
 }
 
+.header {
+    justify-content: space-between;
+    color: var(--second-color);
+}
+
 .container {
     display: grid;
     grid-template-rows: 40px max-content 40px 40px 100px 100px;
     gap: 16px;
-    width: calc(100% - 80px);
     color: var(--primary-color);
     font-size: 14px;
 }
@@ -86,7 +80,7 @@ select:focus {
 }
 
 .probe-img {
-    width: calc(100% + 40px);
+    width: 100%;
 }
 
 .ellipse {
@@ -123,9 +117,42 @@ select:focus {
 
 .probe {
     display: grid;
-    grid-template-columns: 1fr 2.5fr 1fr;
+    grid-template-columns: 1fr 2fr 1fr;
     align-items: center;
     padding: 0px 16px;
+}
+
+.probe .dropdown {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--second-color);
+    height: 100%;
+    font-size: 24px;
+    font-weight: bold;
+    position: relative;
+    cursor: pointer;
+}
+
+.dropdown-content {
+    position: absolute;
+    box-shadow: 4px 4px 4px var(--shadow-2);
+    z-index: 1;
+    display: none;
+    top: 40px;
+    width: 100%;
+    background: white;
+    text-align: center;
+}
+
+.dropdown-content p {
+    margin: 4px 0px;
+    color: var(--primary-color);
+    cursor: pointer;
+}
+
+.dropdown-content p:hover {
+    color: var(--second-color);
 }
 
 .probe label {
@@ -134,7 +161,7 @@ select:focus {
     font-weight: bold;
 }
 
-.probe div {
+.probe .arrow {
     justify-self: flex-end;
 }
 
@@ -336,6 +363,7 @@ select:focus {
     border-left: 2px solid var(--second-color);
     border-bottom: 2px solid var(--second-color);
     border-radius: 0;
+    cursor: pointer;
 }
 
 .up {

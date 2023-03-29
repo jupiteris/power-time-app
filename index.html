@@ -9,7 +9,12 @@
 </head>
 
 
-<body class="flex relative">
+<body>
+
+  <div class="header flex">
+    <div>logo1</div>
+    <div>logo2</div>
+  </div>
 
   <div class="container">
 
@@ -42,17 +47,20 @@
     </div>
 
     <div class="probe">
-      <label for="probes">Probe</label>
-      <select name="probes" id="probes" onchange="changeProbe(this)" onfocus="focusProbe()" onblur="blurProbe()">
-        <option value="1P">1P</option>
-        <option value="2P">2P</option>
-        <option value="3L">3L</option>
-        <option value="4L">4L</option>
-        <option value="5S">5S</option>
-        <option value="6L">6L</option>
-        <option value="7P">7P</option>
-      </select>
-      <div class="arrow down"></div>
+      <label>Probe</label>
+      <div class="dropdown" onclick="handleDropdown()">
+        <span class="probe-value">1P</span>
+        <div class="dropdown-content">
+          <p onclick='changeProbe("1P")'>1P</p>
+          <p onclick='changeProbe("2P")'>2P</p>
+          <p onclick='changeProbe("3L")'>3L</p>
+          <p onclick='changeProbe("4L")'>4L</p>
+          <p onclick='changeProbe("5S")'>5S</p>
+          <p onclick='changeProbe("6L")'>6L</p>
+          <p onclick='changeProbe("7P")'>7P</p>
+        </div>
+      </div>
+      <div class="arrow down" onclick="handleDropdown()"></div>
     </div>
 
     <div class="probe-quantity">
