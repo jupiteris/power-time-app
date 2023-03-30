@@ -29,7 +29,7 @@ body {
     max-width: 500px;
     display: grid;
     grid-template-rows: max-content 1fr;
-    gap: 20px;
+    gap: 30px;
     padding: 20px 40px;
     box-sizing: border-box;
     position: relative;
@@ -66,6 +66,7 @@ button:disabled {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     color: var(--second-color);
+    margin: 0 -15px;
 }
 
 .header img {
