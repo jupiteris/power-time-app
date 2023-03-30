@@ -11,9 +11,10 @@
 
 <body>
 
-  <div class="header flex">
-    <div>logo1</div>
-    <div>logo2</div>
+  <div class="header">
+    <img src="assets/img/logos/Neuwave_Logo.png" alt="Neuwave_Logo">
+    <div></div>
+    <img src="assets/img/logos/ETH_Logo.png" alt="ETH_Logo">
   </div>
 
   <div class="container">
@@ -28,19 +29,20 @@
 
       <div class="ellipse relative">
         <div class="length-line line absolute">
-          <div class="flex absolute"></div>
+          <div class="flex absolute value"></div>
         </div>
 
         <div class="height-line line absolute">
-          <div class="flex absolute"></div>
+          <div class="flex absolute value"></div>
         </div>
 
         <div class="offset-line line absolute flex">
-          <div class="absolute"></div>
+          <div class="absolute len"></div>
+          <div class="absolute value"></div>
         </div>
       </div>
 
-      <img class="absolute probe-img" />
+      <img class="absolute probe-img" alt="probe" />
 
       <div class="flex absolute info-btn" onclick="openInfoModal()"> i </div>
 
@@ -97,7 +99,7 @@
 
   <div id="info-modal" class="modal absolute">
     <div class="relative flex modal-content">
-      <span class="flex close absolute" onclick="onCloseModal()">&times;</span>
+      <span class="flex close absolute" onclick="onCloseInfoModal()">&times;</span>
 
       The ablation zone data provided on-screen and in the instructions for use are from ablations performed in ex-vivo
       animal tissue and do not account for the cooling effects of blood flow. Blood flow will generally result in a
@@ -108,18 +110,35 @@
       <br />
       <br />
       Additional factors that may impact the final ablation zone include but are not limited to:
-      <p>Factors that may result in a smaller ablation</p>
+      <h4>Factors that may result in a smaller ablation</h4>
       <ul>
         <li>Increased/high level of vascularity</li>
         <li>Proximity to large blood vessels</li>
       </ul>
-      <p>Factors that may result in a larger ablation</p>
+      <h4>Factors that may result in a larger ablation</h4>
       <ul>
         <li>Decreased/low level of vascularity</li>
         <li>Prior treatments such as TACE or embolization</li>
       </ul>
       <br />
       Physicians should consider all factors when determining the appropriate ablation parameters for each case.
+    </div>
+  </div>
+
+  <div id="splash-modal" class="modal absolute">
+    <div class="relative modal-content">
+      <span class="flex close absolute" onclick="onCloseSplashModal()">&times;</span>
+      <img src="assets/img/logos/Neuwave_Logo.png" alt="Neuwave_Logo">
+      <h3>
+        The NeuWave Ablation System and Accessories are indicated for the ablation (coagulation) of soft tissue in
+        percutaneous, open surgical and in conjunction with laparoscopic surgical settings, including the partial or
+        complete ablation
+        of non-resectable liver tumors. The NeuWave Microwave Ablation System and Accessories are not indicated for use
+        in
+        cardiac procedures.
+        The system is designed for facility use and should only be used under the orders of a clinician.
+      </h3>
+      <i>LLC. XXXXXX-XXXXXX</i>
     </div>
   </div>
 

@@ -2,6 +2,7 @@ const visualDom = document.querySelector('.visual');
 const ellipseDom = document.querySelector('.ellipse');
 const probImg = document.querySelector('.probe-img');
 const infoModal = document.getElementById('info-modal');
+const splashModal = document.getElementById('splash-modal');
 const tissueOptions = document.querySelectorAll('.tissues button');
 const probeQuantityOptions = document.querySelectorAll('.probe-quantity button');
 const probeSelectArrow = document.querySelector('.probe .arrow');
@@ -28,8 +29,12 @@ function openInfoModal() {
     infoModal.style.display = "block";
 }
 
-function onCloseModal() {
+function onCloseInfoModal() {
     infoModal.style.display = "none";
+}
+
+function onCloseSplashModal() {
+    splashModal.style.display = "none";
 }
 
 // When the user clicks anywhere outside of the modal, close it
@@ -41,6 +46,7 @@ window.onclick = function (event) {
 
 // mount event
 window.onload = function () {
+    splashModal.style.display = "block";
     visualDom.style.height = visualDom.clientWidth + "px";
     renderEllipse();
     renderTime();
@@ -132,15 +138,16 @@ function renderEllipse() {
             Dimensions[e.Dimension] = e['Variable 1'] * Math.log(time) + e['Variable 2'] * power + e['Variable 3']
         })
 
-        ellipseDom.querySelector('.length-line div').innerHTML = Dimensions.Length.toFixed(1) + 'cm'
-        ellipseDom.querySelector('.height-line div').innerHTML = Dimensions.Height.toFixed(1) + 'cm'
-        ellipseDom.querySelector('.offset-line div').innerHTML = Dimensions.Offset.toFixed(1) + 'cm'
-
+        probImg.style.marginRight = (visualDom.clientWidth * Dimensions.Offset / THRESHOLD) + 'px';
         ellipseDom.style.width = (visualDom.clientWidth * Dimensions.Length / THRESHOLD) + 'px';
         ellipseDom.style.height = (visualDom.clientWidth * Dimensions.Height / THRESHOLD) + 'px';
 
-        probImg.style.marginRight = (visualDom.clientWidth * Dimensions.Offset / THRESHOLD) + 'px';
+        ellipseDom.querySelector('.length-line .value').innerHTML = Dimensions.Length.toFixed(1) + 'cm'
+        ellipseDom.querySelector('.height-line .value').innerHTML = Dimensions.Height.toFixed(1) + 'cm'
+        ellipseDom.querySelector('.offset-line .value').innerHTML = Dimensions.Offset.toFixed(1) + 'cm'
         ellipseDom.querySelector('.offset-line').style.width = (visualDom.clientWidth * Math.abs(Dimensions.Offset) / THRESHOLD) + 'px';
+        ellipseDom.querySelector('.offset-line .len').style.width = (visualDom.clientWidth * Math.abs(Dimensions.Offset) / THRESHOLD) + 'px';
+        ellipseDom.querySelector('.offset-line').style.height = (visualDom.clientWidth * Dimensions.Height / (2 * THRESHOLD)) + 16 + 'px';
 
         if (Dimensions.Offset < 0) {
             ellipseDom.querySelector('.offset-line').style.right = (visualDom.clientWidth * Dimensions.Offset / THRESHOLD) + 'px';
