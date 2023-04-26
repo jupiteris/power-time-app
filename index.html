@@ -6,139 +6,152 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>PowerTimeApp</title>
   <link rel="stylesheet" href="assets/styles/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 
 <body>
-
-  <div class="header">
-    <img src="assets/img/logos/Neuwave_Logo.png" alt="Neuwave_Logo">
-    <div></div>
-    <img src="assets/img/logos/ETH_Logo.png" alt="ETH_Logo">
-  </div>
-
-  <div class="container">
-
-    <div class="tissues">
-      <button value="LV" class="clicked">LV</button>
-      <button value="KD">KD</button>
-      <button value="LG">LG</button>
-    </div>
-
-    <div class="flex relative visual">
-
-      <div class="ellipse relative">
-        <div class="length-line line absolute">
-          <div class="flex absolute value"></div>
-        </div>
-
-        <div class="height-line line absolute">
-          <div class="flex absolute value"></div>
-        </div>
-
-        <div class="offset-line line absolute flex">
-          <div class="absolute len"></div>
-          <div class="absolute value"></div>
-        </div>
-      </div>
-
-      <img class="absolute probe-img" alt="probe" />
-
-      <div class="flex absolute info-btn" onclick="openInfoModal()"> i </div>
-
-    </div>
-
-    <div class="probe">
-      <label>Probe</label>
-      <div class="dropdown" onclick="handleDropdown()">
-        <span class="probe-value">1P</span>
-        <div class="dropdown-content">
-          <p onclick='changeProbe("1P")'>1P</p>
-          <p onclick='changeProbe("2P")'>2P</p>
-          <p onclick='changeProbe("3L")'>3L</p>
-          <p onclick='changeProbe("4L")'>4L</p>
-          <p onclick='changeProbe("5S")'>5S</p>
-          <p onclick='changeProbe("6L")'>6L</p>
-          <p onclick='changeProbe("7P")'>7P</p>
-        </div>
-      </div>
-      <div class="arrow down" onclick="handleDropdown()"></div>
-    </div>
-
-    <div class="probe-quantity">
-      <button value="1" class="clicked">1 Probe</button>
-      <button value="2">2 Probes</button>
-      <button value="3">3 Probes</button>
-    </div>
-
-    <div class="time card">
-      <div class="title">Time</div>
-      <div class="flex relative">
-        <div class="step flex absolute">
-          <button class="arrow up" onclick="changeTime(1)"></button>
-          <button class="arrow down" onclick="changeTime(-1)"></button>
-        </div>
-        <p class="value"></p>
-      </div>
-      <div class="unit">Minutes</div>
-    </div>
-
-    <div class="power card">
-      <div class="title">Power</div>
-      <div class="flex relative">
-        <div class="step flex absolute">
-          <button class="arrow up" onclick="changePower(1)"></button>
-          <button class="arrow down" onclick="changePower(-1)"></button>
-        </div>
-        <p class="value"></p>
-      </div>
-      <div class="unit">Watts</div>
-    </div>
-
-  </div>
-
-  <div id="info-modal" class="modal absolute">
-    <div class="relative flex modal-content">
-      <span class="flex close absolute" onclick="onCloseInfoModal()">&times;</span>
-
-      The ablation zone data provided on-screen and in the instructions for use are from ablations performed in ex-vivo
-      animal tissue and do not account for the cooling effects of blood flow. Blood flow will generally result in a
-      smaller ablation.
-      <br />
-      <br />
-      Lower power ablations are more impacted by the cooling effects of blood flow.
-      <br />
-      <br />
-      Additional factors that may impact the final ablation zone include but are not limited to:
-      <h4>Factors that may result in a smaller ablation</h4>
-      <ul>
-        <li>Increased/high level of vascularity</li>
-        <li>Proximity to large blood vessels</li>
-      </ul>
-      <h4>Factors that may result in a larger ablation</h4>
-      <ul>
-        <li>Decreased/low level of vascularity</li>
-        <li>Prior treatments such as TACE or embolization</li>
-      </ul>
-      <br />
-      Physicians should consider all factors when determining the appropriate ablation parameters for each case.
-    </div>
-  </div>
-
-  <div id="splash-modal" class="modal absolute">
-    <div class="relative modal-content">
-      <span class="flex close absolute" onclick="onCloseSplashModal()">&times;</span>
+  <div class="app">
+    <div class="header">
       <img src="assets/img/logos/Neuwave_Logo.png" alt="Neuwave_Logo">
-      <h3>
-        The NeuWave Ablation System and Accessories are indicated for the ablation (coagulation) of soft tissue in
-        percutaneous, open surgical and in conjunction with laparoscopic surgical settings, including the partial or
-        complete ablation
-        of non-resectable liver tumors. The NeuWave Microwave Ablation System and Accessories are not indicated for use
-        in
-        cardiac procedures.
-        The system is designed for facility use and should only be used under the orders of a clinician.
-      </h3>
-      <i>LLC. XXXXXX-XXXXXX</i>
+      <div></div>
+      <img src="assets/img/logos/ETH_Logo.png" alt="ETH_Logo">
+    </div>
+
+    <div class="container">
+
+      <div class="tissues">
+        <button class="clicked">Liver</button>
+        <button>Kidney</button>
+        <button>Lung</button>
+      </div>
+
+      <div class="flex relative visual">
+
+        <div class="ellipse relative">
+          <div class="length-line line absolute">
+            <div class="flex absolute value"></div>
+          </div>
+
+          <div class="height-line line absolute">
+            <div class="flex absolute value"></div>
+          </div>
+
+          <div class="offset-line line absolute flex">
+            <div class="absolute len"></div>
+            <div class="absolute value"></div>
+          </div>
+        </div>
+
+        <div class="absolute probes-container">
+        </div>
+
+        <div class="flex absolute info-btn" onclick="openInfoModal()"> i </div>
+
+      </div>
+
+      <div class="probe">
+        <label>Probe</label>
+        <div class="dropdown" onclick="handleDropdown(event)">
+          <span class="probe-value">PR</span>
+          <div class="dropdown-content">
+            <button onclick='changeProbe("PR")'>PR</button>
+            <button onclick='changeProbe("PR-XT")'>PR-XT</button>
+            <button onclick='changeProbe("LK")'>LK</button>
+            <button onclick='changeProbe("LK-XT")'>LK-XT</button>
+            <button onclick='changeProbe("SR")'>SR</button>
+            <button onclick='changeProbe("LN")'>LN</button>
+            <button onclick='changeProbe("PRS15")'>PRS15</button>
+          </div>
+        </div>
+        <i class="fa fa-angle-down" onclick="handleDropdown(event)"></i>
+      </div>
+
+      <div class="probe-quantity">
+        <button value="1" class="clicked">1 Probe</button>
+        <button value="2">2 Probes</button>
+        <button value="3">3 Probes</button>
+      </div>
+
+      <div class="time card">
+        <div class="title">Time</div>
+        <div class="flex relative">
+          <div class="step flex absolute">
+            <button class="chevron-up" onclick="changeTime(1)">
+              <i class="fa fa-angle-up"></i>
+            </button>
+            <button class="chevron-down" onclick="changeTime(-1)">
+              <i class="fa fa-angle-down"></i>
+            </button>
+          </div>
+          <p class="value"></p>
+        </div>
+        <div class="unit">Minutes</div>
+      </div>
+
+      <div class="power card">
+        <div class="title">Power</div>
+        <div class="flex relative">
+          <div class="step flex absolute">
+            <button class="chevron-up" onclick="changePower(1)">
+              <i class="fa fa-angle-up"></i>
+            </button>
+            <button class="chevron-down" onclick="changePower(-1)">
+              <i class="fa fa-angle-down"></i>
+            </button>
+          </div>
+          <p class="value"></p>
+        </div>
+        <div class="unit">Watts</div>
+      </div>
+
+    </div>
+
+    <div id="info-modal" class="modal absolute">
+      <div class="relative flex modal-content">
+        <span class="flex close absolute" onclick="onCloseInfoModal()">&times;</span>
+
+        The ablation zone data provided on-screen and in the instructions for use are from ablations performed in
+        ex-vivo
+        animal tissue and do not account for the cooling effects of blood flow. Blood flow will generally result in a
+        smaller ablation.
+        <br />
+        <br />
+        Lower power ablations are more impacted by the cooling effects of blood flow.
+        <br />
+        <br />
+        Additional factors that may impact the final ablation zone include but are not limited to:
+        <h4>Factors that may result in a smaller ablation</h4>
+        <ul>
+          <li>Increased/high level of vascularity</li>
+          <li>Proximity to large blood vessels</li>
+        </ul>
+        <h4>Factors that may result in a larger ablation</h4>
+        <ul>
+          <li>Decreased/low level of vascularity</li>
+          <li>Prior treatments such as TACE or embolization</li>
+        </ul>
+        <br />
+        Physicians should consider all factors when determining the appropriate ablation parameters for each case.
+      </div>
+    </div>
+
+    <div id="splash-modal" class="modal absolute">
+      <div class="relative modal-content">
+        <button class="absolute clicked" onclick="onCloseSplashModal()">Acknowledge</button>
+        <img src="assets/img/logos/Neuwave_Logo.png" alt="Neuwave_Logo">
+        <h3>
+          The NeuWave Ablation System and Accessories are indicated for the ablation (coagulation) of soft tissue in
+          percutaneous, open surgical and in conjunction with laparoscopic surgical settings, including the partial or
+          complete ablation
+          of non-resectable liver tumors. The NeuWave Microwave Ablation System and Accessories are not indicated for
+          use
+          in
+          cardiac procedures.
+          The system is designed for facility use and should only be used under the orders of a clinician.
+        </h3>
+        <i>LLC. XXXXXX-XXXXXX</i>
+      </div>
     </div>
   </div>
 
