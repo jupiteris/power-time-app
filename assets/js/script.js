@@ -16,12 +16,11 @@ let time = 5;
 let power = 60;
 let probeQuantity = 1;
 let showProbeList = false;
-let MAX_POWER = 65;
 
-// static values
-const MIN_TIME = 1;
+let MAX_POWER = 140;
+let MIN_POWER = 30;
 const MAX_TIME = 10;
-const MIN_POWER = 5;
+let MIN_TIME = 0;
 const TIME_STEP = 1;
 const POWER_STEP = 5;
 const THRESHOLD = 6.8; // Max length
@@ -53,10 +52,8 @@ window.onclick = function (event) {
 // mount event
 window.onload = function () {
     splashModal.style.display = "block";
-    disableProbes();
+    renderTimePower();
     renderEllipse();
-    renderTime();
-    renderPower();
 }
 
 function unselectAll(options) {
@@ -70,7 +67,6 @@ tissueOptions.forEach(option => {
         unselectAll(tissueOptions);
         option.className = "clicked";
         tissue = option.textContent;
-        disableProbes();
         disableProbeQuantities();
         renderEllipse();
     });
@@ -81,49 +77,29 @@ probeQuantityOptions.forEach(option => {
         unselectAll(probeQuantityOptions);
         option.className = "clicked";
         probeQuantity = parseInt(option.getAttribute('value'));
-        if (probeQuantity !== 1) {
-            document.querySelector('.time i').disabled = true;
-            document.querySelector('.power i').disabled = true;
-        }
         disableTissues();
+        renderTimePower();
         renderEllipse();
     });
 });
 
-function renderTime() {
-    document.querySelector('.time .value').innerHTML = time + ':00';
-    document.querySelector('.time .chevron-up').disabled = time >= MAX_TIME
-    document.querySelector('.time .chevron-down').disabled = time <= MIN_TIME
-}
-
-function renderPower() {
-    document.querySelector('.power .value').innerHTML = power;
-    document.querySelector('.power .chevron-up').disabled = power >= MAX_POWER
-    document.querySelector('.power .chevron-down').disabled = power <= MIN_POWER
-}
-
 function changeTime(direction) {
     time += TIME_STEP * direction;
-    renderTime();
+    renderTimePower();
     renderEllipse();
 }
 
 function changePower(direction) {
     power += POWER_STEP * direction;
-    renderPower();
+    renderTimePower();
     renderEllipse();
 }
 
-// probe type selector
 function changeProbe(value) {
+    document.querySelector('.probe-value').innerHTML = value;
     probe = value;
-    MAX_POWER = MAX_POWERS[value];
-    if (power > MAX_POWER) {
-        power = MAX_POWER;
-    }
 
-    renderPower();
-    disableTissues();
+    renderTimePower();
     renderEllipse();
 }
 
@@ -162,50 +138,89 @@ function disableProbeQuantities() {
 }
 
 function disableTissues() {
-    let availableTissues = [...new Set(CALCULATIONS.filter(e => e.Probe === probe).map(e => e.Tissue))];
-    if (probeQuantity !== 1 && availableTissues.includes('Liver')) {
-        availableTissues = ['Liver']
-    }
-
     tissueOptions.forEach(tissueOption => {
         tissueOption.disabled = false;
-        if (!availableTissues.includes(tissueOption.textContent)) {
+        if (probeQuantity > 1 && tissueOption.textContent !== 'Liver') {
             tissueOption.disabled = true;
         }
     });
 }
 
-function renderEllipse() {
-    visualDom.style.height = (document.querySelector('.container').clientWidth * (0.55 + probeQuantity / 10)) + "px";
+function renderTimePower() {
+    if (probeQuantity > 1) {
+        const val = MULTI_PROBES.find(e => e.Count === probeQuantity && e.Probe === probe);
+        if (!val) return;
+        power = val.Power;
+        time = val.Time;
+        document.querySelector('.time .value').innerHTML = time + ':00';
+        document.querySelector('.power .value').innerHTML = power;
+        document.querySelector('.time .chevron-up').disabled = true;
+        document.querySelector('.time .chevron-down').disabled = true;
+        document.querySelector('.power .chevron-up').disabled = true;
+        document.querySelector('.power .chevron-down').disabled = true;
+    } else {
+        MIN_POWER = parseInt(Object.keys(POWER_TIME_LIMIT[probe])[0]);
+        MAX_POWER = MAX_POWERS[probe];
 
-    let Dimensions = { Length: 200, Height: 150, Offset: null };
+        if (power > MAX_POWER) {
+            power = MAX_POWER;
+        }
+
+        if (power < MIN_POWER) {
+            power = MIN_POWER;
+        }
+
+        MIN_TIME = POWER_TIME_LIMIT[probe][power] ?? 0;
+        if (time < MIN_TIME) {
+            time = MIN_TIME;
+        }
+
+        document.querySelector('.time .value').innerHTML = time + ':00';
+        document.querySelector('.time .chevron-up').disabled = time >= MAX_TIME;
+        document.querySelector('.time .chevron-down').disabled = time <= MIN_TIME;
+
+        document.querySelector('.power .value').innerHTML = power;
+        document.querySelector('.power .chevron-up').disabled = power >= MAX_POWER;
+        document.querySelector('.power .chevron-down').disabled = power <= MIN_POWER;
+    }
+}
+
+function renderEllipse() {
+    // visualDom.style.height = visualDom.clientWidth * (0.55 + probeQuantity / 10) + "px";
+    let Dimensions = {};
     if (probeQuantity === 1) {
         CALCULATIONS
             .filter(({ Probe, Tissue }) => Probe === probe && Tissue === tissue)
             .forEach(e => {
-                Dimensions[e.Dimension] = e['Variable 1'] * Math.log(time) + e['Variable 2'] * power + e['Variable 3']
-            })
+                Dimensions[e.Dimension] = e['Variable 1'] * Math.log(time) + e['Variable 2'] * power + e['Variable 3'];
+            });
     } else {
         Dimensions = MULTI_PROBES.filter(({ Count, Probe }) => Count === probeQuantity && Probe === probe)[0];
     }
 
-    // render selected probe type
-    document.querySelector('.probe-value').innerHTML = probe;
+    if (!Dimensions || Object.keys(Dimensions).length === 0) {
+        // remove previous rendered ellipse
+        visualDom.style.display = 'none';
+        document.querySelector('.no-data').style.display = "block";
+        return;
+    };
+
+    visualDom.style.display = "flex";
+    document.querySelector('.no-data').style.display = "none";
 
     // render probe images 
     probesContainerDom.innerHTML = '';
     for (let i = 0; i < probeQuantity; i++) {
-        probesContainerDom.innerHTML += `<img alt="probe" src="assets/img/probs/${probe}.png" />`
+        probesContainerDom.innerHTML += `<img alt="probe" src="assets/img/probs/${probe}.png" />`;
     }
     probesContainerDom.style.marginRight = (visualDom.clientWidth * Dimensions.Offset / THRESHOLD) + 'px';
 
-    ellipseDom.style.display = "block"
     ellipseDom.style.width = (visualDom.clientWidth * Dimensions.Length / THRESHOLD) + 'px';
     ellipseDom.style.height = (visualDom.clientWidth * Dimensions.Height / THRESHOLD) + 'px';
-    ellipseDom.querySelector('.length-line .value').innerHTML = Dimensions.Length.toFixed(1) + 'cm'
-    ellipseDom.querySelector('.height-line .value').innerHTML = Dimensions.Height.toFixed(1) + 'cm'
+    ellipseDom.querySelector('.length-line .value').innerHTML = Dimensions.Length.toFixed(1) + 'cm';
+    ellipseDom.querySelector('.height-line .value').innerHTML = Dimensions.Height.toFixed(1) + 'cm';
     ellipseDom.querySelector('.offset-line').style.visibility = "visible";
-    ellipseDom.querySelector('.offset-line .value').innerHTML = Dimensions.Offset.toFixed(1) + 'cm'
+    ellipseDom.querySelector('.offset-line .value').innerHTML = Dimensions.Offset.toFixed(1) + 'cm';
     ellipseDom.querySelector('.offset-line').style.width = (visualDom.clientWidth * Math.abs(Dimensions.Offset) / THRESHOLD) + 'px';
     ellipseDom.querySelector('.offset-line .len').style.width = (visualDom.clientWidth * Math.abs(Dimensions.Offset) / THRESHOLD) + 'px';
     ellipseDom.querySelector('.offset-line').style.height = (visualDom.clientWidth * Dimensions.Height / (2 * THRESHOLD)) + 16 + 'px';
@@ -213,12 +228,12 @@ function renderEllipse() {
     if (Dimensions.Offset < 0) {
         ellipseDom.querySelector('.offset-line').style.right = (visualDom.clientWidth * Dimensions.Offset / THRESHOLD) + 'px';
         ellipseDom.querySelector('.height-line').style.right = -((visualDom.clientWidth * Math.abs(Dimensions.Offset) / THRESHOLD) + 14) + 'px';
-        visualDom.style.marginRight = ((visualDom.clientWidth * Math.abs(Dimensions.Offset) / THRESHOLD) + 60) + 'px';
+        visualDom.style.marginRight = ((visualDom.clientWidth * Math.abs(Dimensions.Offset) / THRESHOLD) + 64) + 'px';
     }
     else {
         ellipseDom.querySelector('.offset-line').style.right = 0;
         ellipseDom.querySelector('.height-line').style.right = '-14px';
-        visualDom.style.marginRight = '60px'
+        visualDom.style.marginRight = '64px';
     }
 
     if (!Dimensions.Offset) {

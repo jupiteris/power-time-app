@@ -359,9 +359,8 @@ const CALCULATIONS = [
         "Variable 2": 0.003666,
         "Variable 3": 0
     }
-]
+];
 
-// TODO: multi probes are only available for Liver
 const MULTI_PROBES = [
     {
         "Probe": "PR",
@@ -369,13 +368,17 @@ const MULTI_PROBES = [
         "Length": 5.8,
         "Height": 4.6,
         "Offset": 0,
+        "Time": 10,
+        "Power": 65
     },
     {
         "Probe": "PR",
         "Count": 3,
         "Length": 6.5,
         "Height": 5.3,
-        "Offset": 0
+        "Offset": 0,
+        "Time": 10,
+        "Power": 65
     },
     {
         "Probe": "PR-XT",
@@ -383,13 +386,17 @@ const MULTI_PROBES = [
         "Length": 5.6,
         "Height": 4.7,
         "Offset": 0,
+        "Time": 10,
+        "Power": 65
     },
     {
         "Probe": "PR-XT",
         "Count": 3,
         "Length": 6.0,
         "Height": 5.2,
-        "Offset": 0
+        "Offset": 0,
+        "Time": 10,
+        "Power": 65
     },
     {
         "Probe": "PRS15",
@@ -397,13 +404,17 @@ const MULTI_PROBES = [
         "Length": 5.6,
         "Height": 4.4,
         "Offset": 0,
+        "Time": 10,
+        "Power": 80
     },
     {
         "Probe": "PRS15",
         "Count": 3,
         "Length": 6.2,
         "Height": 4.9,
-        "Offset": 0
+        "Offset": 0,
+        "Time": 10,
+        "Power": 80
     },
     {
         "Probe": "LK",
@@ -411,13 +422,17 @@ const MULTI_PROBES = [
         "Length": 6.4,
         "Height": 4.8,
         "Offset": 0,
+        "Time": 10,
+        "Power": 95
     },
     {
         "Probe": "LK",
         "Count": 3,
         "Length": 6.4,
         "Height": 5.0,
-        "Offset": 0
+        "Offset": 0,
+        "Time": 10,
+        "Power": 65
     },
     {
         "Probe": "LK-XT",
@@ -425,13 +440,17 @@ const MULTI_PROBES = [
         "Length": 6.8,
         "Height": 4.9,
         "Offset": 0,
+        "Time": 10,
+        "Power": 95
     },
     {
         "Probe": "LK-XT",
         "Count": 3,
         "Length": 6.5,
         "Height": 5.3,
-        "Offset": 0
+        "Offset": 0,
+        "Time": 10,
+        "Power": 65
     },
     {
         "Probe": "SR",
@@ -439,15 +458,19 @@ const MULTI_PROBES = [
         "Length": 6.6,
         "Height": 5.1,
         "Offset": 0,
+        "Time": 10,
+        "Power": 95
     },
     {
         "Probe": "SR",
         "Count": 3,
         "Length": 6.3,
         "Height": 5.2,
-        "Offset": 0
+        "Offset": 0,
+        "Time": 10,
+        "Power": 65
     },
-]
+];
 
 const MAX_POWERS = {
     'PR': 65,
@@ -457,4 +480,14 @@ const MAX_POWERS = {
     'SR': 140,
     'LN': 140,
     'PRS15': 80
-}
+};
+
+const POWER_TIME_LIMIT = {
+    'PR': { 30: 5, 35: 3, 40: 3, 45: 3, 50: 0 },
+    'PR-XT': { 30: 5, 35: 3, 40: 3, 45: 3, 50: 0 },
+    'LN': { 40: 5, 45: 5, 50: 5, 55: 5, 60: 3, 65: 3, 70: 3, 75: 3, 80: 3, 85: 3, 90: 3, 95: 3, 100: 0 },
+    'LK': { 40: 5, 45: 5, 50: 5, 55: 5, 60: 3, 65: 3, 70: 3, 75: 3, 80: 3, 85: 3, 90: 3, 95: 3, 100: 0 },
+    'LK-XT': { 40: 5, 45: 5, 50: 5, 55: 5, 60: 3, 65: 3, 70: 3, 75: 3, 80: 3, 85: 3, 90: 3, 95: 3, 100: 0 },
+    'SR': { 40: 5, 45: 5, 50: 5, 55: 5, 60: 3, 65: 3, 70: 3, 75: 3, 80: 3, 85: 3, 90: 3, 95: 3, 100: 0 },
+    'PRS15': { 40: 3, 45: 3, 50: 3, 55: 3, 60: 0 }
+};

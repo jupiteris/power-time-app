@@ -18,16 +18,14 @@
       <img src="assets/img/logos/ETH_Logo.png" alt="ETH_Logo">
     </div>
 
-    <div class="container">
+    <div class="tissues">
+      <button class="clicked">Liver</button>
+      <button>Kidney</button>
+      <button>Lung</button>
+    </div>
 
-      <div class="tissues">
-        <button class="clicked">Liver</button>
-        <button>Kidney</button>
-        <button>Lung</button>
-      </div>
-
+    <div class="relative flex">
       <div class="flex relative visual">
-
         <div class="ellipse relative">
           <div class="length-line line absolute">
             <div class="flex absolute value"></div>
@@ -45,66 +43,68 @@
 
         <div class="absolute probes-container">
         </div>
-
-        <div class="flex absolute info-btn" onclick="openInfoModal()"> i </div>
-
       </div>
 
-      <div class="probe">
-        <label>Probe</label>
-        <div class="dropdown" onclick="handleDropdown(event)">
-          <span class="probe-value">PR</span>
-          <div class="dropdown-content">
-            <button onclick='changeProbe("PR")'>PR</button>
-            <button onclick='changeProbe("PR-XT")'>PR-XT</button>
-            <button onclick='changeProbe("LK")'>LK</button>
-            <button onclick='changeProbe("LK-XT")'>LK-XT</button>
-            <button onclick='changeProbe("SR")'>SR</button>
-            <button onclick='changeProbe("LN")'>LN</button>
-            <button onclick='changeProbe("PRS15")'>PRS15</button>
-          </div>
+      <div class="no-data">
+        No Data Available
+      </div>
+
+      <div class="flex absolute info-btn" onclick="openInfoModal()"> i </div>
+    </div>
+
+    <div class="probe">
+      <label>Probe</label>
+      <div class="dropdown" onclick="handleDropdown(event)">
+        <span class="probe-value">PR</span>
+        <div class="dropdown-content">
+          <button onclick='changeProbe("PR")'>PR</button>
+          <button onclick='changeProbe("PR-XT")'>PR-XT</button>
+          <button onclick='changeProbe("LK")'>LK</button>
+          <button onclick='changeProbe("LK-XT")'>LK-XT</button>
+          <button onclick='changeProbe("SR")'>SR</button>
+          <button onclick='changeProbe("LN")'>LN</button>
+          <button onclick='changeProbe("PRS15")'>PRS15</button>
         </div>
-        <i class="fa fa-angle-down" onclick="handleDropdown(event)"></i>
       </div>
+      <i class="fa fa-angle-down" onclick="handleDropdown(event)"></i>
+    </div>
 
-      <div class="probe-quantity">
-        <button value="1" class="clicked">1 Probe</button>
-        <button value="2">2 Probes</button>
-        <button value="3">3 Probes</button>
-      </div>
+    <div class="probe-quantity">
+      <button value="1" class="clicked">1 Probe</button>
+      <button value="2">2 Probes</button>
+      <button value="3">3 Probes</button>
+    </div>
 
-      <div class="time card">
-        <div class="title">Time</div>
-        <div class="flex relative">
-          <div class="step flex absolute">
-            <button class="chevron-up" onclick="changeTime(1)">
-              <i class="fa fa-angle-up"></i>
-            </button>
-            <button class="chevron-down" onclick="changeTime(-1)">
-              <i class="fa fa-angle-down"></i>
-            </button>
-          </div>
-          <p class="value"></p>
+    <div class="time card">
+      <div class="title">Time</div>
+      <div class="flex relative">
+        <div class="step flex absolute">
+          <button class="chevron-up" onclick="changeTime(1)">
+            <i class="fa fa-angle-up"></i>
+          </button>
+          <button class="chevron-down" onclick="changeTime(-1)">
+            <i class="fa fa-angle-down"></i>
+          </button>
         </div>
-        <div class="unit">Minutes</div>
+        <p class="value"></p>
       </div>
+      <div class="unit">Minutes</div>
+    </div>
 
-      <div class="power card">
-        <div class="title">Power</div>
-        <div class="flex relative">
-          <div class="step flex absolute">
-            <button class="chevron-up" onclick="changePower(1)">
-              <i class="fa fa-angle-up"></i>
-            </button>
-            <button class="chevron-down" onclick="changePower(-1)">
-              <i class="fa fa-angle-down"></i>
-            </button>
-          </div>
-          <p class="value"></p>
+    <div class="power card">
+      <div class="title">Power</div>
+      <div class="flex relative">
+        <div class="step flex absolute">
+          <button class="chevron-up" onclick="changePower(1)">
+            <i class="fa fa-angle-up"></i>
+          </button>
+          <button class="chevron-down" onclick="changePower(-1)">
+            <i class="fa fa-angle-down"></i>
+          </button>
         </div>
-        <div class="unit">Watts</div>
+        <p class="value"></p>
       </div>
-
+      <div class="unit">Watts</div>
     </div>
 
     <div id="info-modal" class="modal absolute">
@@ -140,7 +140,7 @@
       <div class="relative modal-content">
         <button class="absolute clicked" onclick="onCloseSplashModal()">Acknowledge</button>
         <img src="assets/img/logos/Neuwave_Logo.png" alt="Neuwave_Logo">
-        <h3>
+        <p>
           The NeuWave Ablation System and Accessories are indicated for the ablation (coagulation) of soft tissue in
           percutaneous, open surgical and in conjunction with laparoscopic surgical settings, including the partial or
           complete ablation
@@ -149,7 +149,7 @@
           in
           cardiac procedures.
           The system is designed for facility use and should only be used under the orders of a clinician.
-        </h3>
+        </p>
         <i>LLC. XXXXXX-XXXXXX</i>
       </div>
     </div>
