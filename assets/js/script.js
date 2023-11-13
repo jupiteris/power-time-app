@@ -8,6 +8,7 @@ const tissueOptions = document.querySelectorAll('.tissues button');
 const probeOptions = document.querySelectorAll('.probe .dropdown-content button');
 const probeQuantityOptions = document.querySelectorAll('.probe-quantity button');
 const probeSelectArrow = document.querySelector('.probe .fa');
+const midPointTip = document.querySelector('.info span b');
 
 // default values
 let tissue = 'Liver';
@@ -39,7 +40,7 @@ function onCloseSplashModal() {
 }
 
 // When the user clicks anywhere outside of the modal, close it
-window.onclick = function (event) {
+window.onclick = function(event) {
     if (event.target == infoModal) {
         infoModal.style.display = "none";
     }
@@ -50,7 +51,7 @@ window.onclick = function (event) {
 }
 
 // mount event
-window.onload = function () {
+window.onload = function() {
     splashModal.style.display = "block";
     renderTimePower();
     renderEllipse();
@@ -63,7 +64,7 @@ function unselectAll(options) {
 }
 
 tissueOptions.forEach(option => {
-    option.addEventListener('click', function () {
+    option.addEventListener('click', function() {
         unselectAll(tissueOptions);
         option.className = "clicked";
         tissue = option.textContent;
@@ -73,7 +74,7 @@ tissueOptions.forEach(option => {
 });
 
 probeQuantityOptions.forEach(option => {
-    option.addEventListener('click', function () {
+    option.addEventListener('click', function() {
         unselectAll(probeQuantityOptions);
         option.className = "clicked";
         probeQuantity = parseInt(option.getAttribute('value'));
@@ -217,6 +218,7 @@ function renderEllipse() {
 
     ellipseDom.style.width = (visualDom.clientWidth * Dimensions.Length / THRESHOLD) + 'px';
     ellipseDom.style.height = (visualDom.clientWidth * Dimensions.Height / THRESHOLD) + 'px';
+    midPointTip.innerHTML = ((Dimensions.Length - Dimensions.Offset) / 2).toFixed(2) + 'cm';
     ellipseDom.querySelector('.length-line .value').innerHTML = Dimensions.Length.toFixed(1) + 'cm';
     ellipseDom.querySelector('.height-line .value').innerHTML = Dimensions.Height.toFixed(1) + 'cm';
     ellipseDom.querySelector('.offset-line').style.visibility = "visible";
